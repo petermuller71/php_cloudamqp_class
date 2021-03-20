@@ -1,8 +1,9 @@
 <?php
-#############################################################################################################
-# CloudMQ / RabbitMQ
-# simple static class to create queues on CloudMQ, sent data to the queue en retrieve data
-#############################################################################################################
+
+###############################################################################
+# simple static class to connect to CLOUDMQ/RabbitMQ
+###############################################################################
+
 
 $res = CloudMQ::create_queue('q1', 0); // Create queue with name 'q1' with expiration time in seconds (0 is: dont expire)
 
@@ -13,7 +14,9 @@ $res = CloudMQ::get('q1', 50000); // get 50k messages from queue with name 'q1'
 print "<br /><br />res $res";
 
 
-
+#############################################################################################################
+# CloudMQ
+#############################################################################################################
 
 class CloudMQ {
 
@@ -29,8 +32,7 @@ class CloudMQ {
         $url    = 'https://sparrow.rmq.cloudamqp.com/api/queues/'.self::$username.'/'.$qname.'/get';
         $method = "POST";
 
-        $res = self::curl($url, $method, $data);
-        return $res;
+        return self::curl($url, $method, $data);
     }
 
 
@@ -41,8 +43,7 @@ class CloudMQ {
         $url    = 'https://sparrow.rmq.cloudamqp.com/api/exchanges/'.self::$username.'/amq.default/publish';
         $method = "POST";
 
-        $res = self::curl($url, $method, $data);
-        return $res;
+        return self::curl($url, $method, $data);
     }
 
 
@@ -59,9 +60,7 @@ class CloudMQ {
         $url = 'https://sparrow.rmq.cloudamqp.com/api/queues/'.self::$username.'/'.$qname;
         $method = "PUT";
 
-        $res = self::curl($url, $method, $data);
-
-        return $res;
+        return self::curl($url, $method, $data);
     }
 
 
